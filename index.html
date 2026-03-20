@@ -16,6 +16,10 @@
   </script>
   <script defer src="/_vercel/speed-insights/script.js"></script>
   <style>
+    /* ── SCROLL ANIMATIONS (opacity only — no layout shift) ── */
+    .anim-fade { opacity: 0; transition: opacity 0.6s ease; }
+    .anim-fade.anim-visible { opacity: 1; }
+
     /* ── RESET & BASE ── */
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
     :root {
@@ -1486,50 +1490,19 @@
       }, 3500);
     }
 
-    // Fade-in on scroll with staggered delays
+    // Fade-in on scroll — opacity only, no translateY to avoid CLS
     const observer = new IntersectionObserver((entries) => {
       entries.forEach(e => {
         if (e.isIntersecting) {
-          const delay = e.target.dataset.delay || 0;
-          setTimeout(() => {
-            e.target.style.opacity = '1';
-            e.target.style.transform = 'translateY(0)';
-          }, delay);
+          e.target.classList.add('anim-visible');
+          observer.unobserve(e.target);
         }
       });
     }, { threshold: 0.1 });
 
-    // Stagger cards within each group
-    document.querySelectorAll('.service-card, .testi-card, .perk, .process-step, .g-item, .ba-pair, .ba-car-name').forEach((el, i) => {
-      el.style.opacity = '0';
-      el.style.transform = 'translateY(28px)';
-      el.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
+    document.querySelectorAll('.service-card, .testi-card, .perk, .process-step, .g-item, .ba-pair, .ba-car-name, .section-tag, .section-title, .divider, .section-sub').forEach(el => {
+      el.classList.add('anim-fade');
       observer.observe(el);
-    });
-
-    // Stagger items within their parent groups
-    document.querySelectorAll('.services-list, .testi-grid, .gallery-grid-uniform, .process-grid, .ba-grid').forEach(group => {
-      Array.from(group.children).forEach((child, i) => {
-        child.dataset.delay = i * 100;
-      });
-    });
-
-    // Animate section titles and dividers
-    const titleObserver = new IntersectionObserver((entries) => {
-      entries.forEach(e => {
-        if (e.isIntersecting) {
-          e.target.style.opacity = '1';
-          e.target.style.transform = 'translateY(0)';
-          e.target.classList.remove('anim-ready');
-        }
-      });
-    }, { threshold: 0.2 });
-
-    document.querySelectorAll('.section-tag, .section-title, .divider, .section-sub').forEach((el, i) => {
-      el.style.opacity = '0';
-      el.style.transform = 'translateY(16px)';
-      el.style.transition = 'opacity 0.5s ease ' + (i % 3) * 0.1 + 's, transform 0.5s ease ' + (i % 3) * 0.1 + 's';
-      titleObserver.observe(el);
     });
 
     // ── LIGHTBOX ──
