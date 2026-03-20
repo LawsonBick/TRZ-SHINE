@@ -184,6 +184,27 @@
       0%,100% { opacity:1; transform:scale(1); }
       50%      { opacity:0.4; transform:scale(0.7); }
     }
+    @keyframes fadeInUp {
+      from { opacity: 0; transform: translateY(30px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+    @keyframes fadeInLeft {
+      from { opacity: 0; transform: translateX(-30px); }
+      to   { opacity: 1; transform: translateX(0); }
+    }
+    @keyframes fadeInRight {
+      from { opacity: 0; transform: translateX(30px); }
+      to   { opacity: 1; transform: translateX(0); }
+    }
+    @keyframes scaleIn {
+      from { opacity: 0; transform: scale(0.9); }
+      to   { opacity: 1; transform: scale(1); }
+    }
+    .anim-ready { opacity: 0; }
+    .anim-fadeInUp    { animation: fadeInUp 0.6s ease forwards; }
+    .anim-fadeInLeft  { animation: fadeInLeft 0.6s ease forwards; }
+    .anim-fadeInRight { animation: fadeInRight 0.6s ease forwards; }
+    .anim-scaleIn     { animation: scaleIn 0.5s ease forwards; }
     .hero h1 {
       font-family: var(--font-head);
       font-size: clamp(44px, 7vw, 90px);
@@ -219,9 +240,10 @@
       font-size: 13px;
       letter-spacing: 1.5px;
       text-transform: uppercase;
-      transition: background 0.2s, transform 0.15s;
+      transition: background 0.2s, transform 0.15s, box-shadow 0.2s;
     }
-    .btn-primary:hover { background: var(--gold-lt); transform: translateY(-2px); }
+    .btn-primary:hover { background: var(--gold-lt); transform: translateY(-3px); box-shadow: 0 4px 18px rgba(232,112,0,0.45); }
+    .btn-primary:active { transform: translateY(-1px); box-shadow: 0 2px 10px rgba(232,112,0,0.35); }
     .btn-outline {
       display: inline-flex; align-items: center; gap: 8px;
       border: 1px solid rgba(247,243,222,0.35);
@@ -232,9 +254,10 @@
       font-size: 13px;
       letter-spacing: 1.5px;
       text-transform: uppercase;
-      transition: border-color 0.2s, color 0.2s, transform 0.15s;
+      transition: border-color 0.2s, color 0.2s, transform 0.15s, box-shadow 0.2s;
     }
-    .btn-outline:hover { border-color: var(--gold); color: var(--gold-lt); transform: translateY(-2px); }
+    .btn-outline:hover { border-color: var(--gold); color: var(--gold-lt); transform: translateY(-3px); box-shadow: 0 4px 18px rgba(232,112,0,0.3); }
+    .btn-outline:active { transform: translateY(-1px); box-shadow: 0 2px 10px rgba(232,112,0,0.25); }
     .btn-outline-brown {
       display: inline-flex; align-items: center; gap: 8px;
       border: 2px solid var(--brown);
@@ -245,9 +268,10 @@
       font-size: 13px;
       letter-spacing: 1.5px;
       text-transform: uppercase;
-      transition: border-color 0.2s, background 0.2s, color 0.2s, transform 0.15s;
+      transition: border-color 0.2s, background 0.2s, color 0.2s, transform 0.15s, box-shadow 0.2s;
     }
-    .btn-outline-brown:hover { border-color: var(--gold); color: var(--gold); transform: translateY(-2px); }
+    .btn-outline-brown:hover { border-color: var(--gold); color: var(--gold); transform: translateY(-3px); box-shadow: 0 4px 18px rgba(232,112,0,0.3); }
+    .btn-outline-brown:active { transform: translateY(-1px); box-shadow: 0 2px 10px rgba(232,112,0,0.25); }
     .hero-stats {
       display: flex; gap: 40px; justify-content: flex-start;
       margin-top: 36px;
@@ -317,7 +341,7 @@
       display: flex;
       align-items: center;
       gap: 28px;
-      transition: box-shadow 0.25s, transform 0.2s;
+      transition: box-shadow 0.3s, transform 0.3s, border-color 0.3s;
       position: relative;
       overflow: hidden;
     }
@@ -330,7 +354,7 @@
       transform-origin: top;
       transition: transform 0.3s;
     }
-    .service-card:hover { box-shadow: 0 6px 24px rgba(78,48,23,0.1); transform: translateY(-2px); }
+    .service-card:hover { box-shadow: 0 8px 30px rgba(78,48,23,0.12); transform: translateY(-4px); border-color: var(--gold); }
     .service-card:hover::before { transform: scaleY(1); }
     .service-icon {
       font-size: 42px;
@@ -523,13 +547,58 @@
 
     /* ── GALLERY ── */
     #gallery { background: var(--dark2); padding-bottom: 60px; }
+    .ba-grid {
+      display: flex;
+      flex-direction: column;
+      gap: 48px;
+    }
+    .ba-pair {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 12px;
+      border-radius: 8px;
+      overflow: hidden;
+    }
+    .ba-pair .ba-img {
+      position: relative;
+      overflow: hidden;
+      border-radius: 6px;
+    }
+    .ba-pair .ba-img img {
+      width: 100%;
+      display: block;
+      transition: transform 0.5s ease;
+    }
+    .ba-pair .ba-img:hover img {
+      transform: scale(1.04);
+    }
+    .ba-label {
+      position: absolute; top: 12px; left: 12px;
+      font-size: 10px; font-weight: 700; letter-spacing: 1.5px;
+      text-transform: uppercase; padding: 4px 10px; border-radius: 3px;
+    }
+    .ba-label.before { background: rgba(180,40,40,0.85); color: #fff; }
+    .ba-label.after { background: rgba(40,160,60,0.85); color: #fff; }
+    .ba-car-name {
+      text-align: center;
+      font-family: var(--font-head);
+      font-size: 16px;
+      font-weight: 700;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      color: var(--brown);
+      margin-top: 10px;
+    }
+    @media (max-width: 600px) {
+      .ba-pair .ba-img img { width: 100%; }
+    }
     .gallery-grid-uniform {
       display: grid;
       grid-template-columns: repeat(3, 1fr);
       gap: 8px;
     }
     .gallery-grid-uniform .g-item {
-      height: 270px;
+      height: 420px;
     }
     .g-item {
       overflow: hidden;
@@ -610,11 +679,12 @@
       border: 1px solid var(--border);
       border-radius: 8px;
       padding: 32px 28px;
-      transition: border-color 0.25s, transform 0.2s;
+      transition: border-color 0.3s, transform 0.3s, box-shadow 0.3s;
     }
     .testi-card:hover {
       border-color: rgba(232,112,0,0.55);
-      transform: translateY(-4px);
+      transform: translateY(-5px);
+      box-shadow: 0 8px 25px rgba(78,48,23,0.1);
     }
     .stars { color: var(--gold); font-size: 16px; margin-bottom: 16px; letter-spacing: 2px; }
     .testi-card blockquote {
@@ -740,10 +810,11 @@
       letter-spacing: 2px;
       text-transform: uppercase;
       cursor: pointer;
-      transition: background 0.2s, transform 0.15s;
+      transition: background 0.2s, transform 0.15s, box-shadow 0.2s;
       font-family: var(--font-body);
     }
-    .form-submit:hover { background: var(--gold-lt); transform: translateY(-1px); }
+    .form-submit:hover { background: var(--gold-lt); transform: translateY(-3px); box-shadow: 0 4px 18px rgba(232,112,0,0.45); }
+    .form-submit:active { transform: translateY(-1px); box-shadow: 0 2px 10px rgba(232,112,0,0.35); }
 
     /* ── FOOTER ── */
     footer {
@@ -782,7 +853,8 @@
       border: 1px solid rgba(247,243,222,0.3);
       display: flex; align-items: center; justify-content: center;
       font-size: 16px;
-      transition: border-color 0.2s, background 0.2s;
+      color: var(--gold-lt);
+      transition: border-color 0.2s, background 0.2s, color 0.2s;
     }
     .social-link:hover {
       border-color: var(--gold);
@@ -1051,81 +1123,146 @@
               <p>Not happy? We'll make it right. Your satisfaction is our priority, no questions asked.</p>
             </div>
           </div>
+          <div class="perk">
+            <div class="perk-icon">💧</div>
+            <div class="perk-text">
+              <h5>De-Ionized Water Technology</h5>
+              <p>Commercial-grade pure water leaves zero spots or streaks — results that stay cleaner, longer.</p>
+            </div>
+          </div>
+          <div class="perk">
+            <div class="perk-icon">🛡️</div>
+            <div class="perk-text">
+              <h5>Fully Insured</h5>
+              <p>$1M liability per occurrence, $2M per year, and $25K garage keepers liability — your vehicle is protected.</p>
+            </div>
+          </div>
         </div>
       </div>
     </div>
   </section>
 
-  <!-- GALLERY -->
+  <!-- BEFORE & AFTER -->
   <section id="gallery">
     <div class="section-tag">Our Work</div>
-    <div class="section-title">After Photos</div>
+    <div class="section-title">Before & After</div>
     <div class="divider"></div>
+    <div class="ba-grid">
+
+      <div>
+        <div class="ba-pair">
+          <div class="ba-img">
+            <img src="trz-ba-vw-before-1.jpg" alt="Volkswagen ID.4 interior before detail" loading="lazy" />
+            <div class="ba-label before">Before</div>
+          </div>
+          <div class="ba-img">
+            <img src="trz-ba-vw-after-1.jpg" alt="Volkswagen ID.4 interior after detail" loading="lazy" />
+            <div class="ba-label after">After</div>
+          </div>
+        </div>
+        <div class="ba-car-name">Volkswagen ID.4 — Interior Detail</div>
+      </div>
+
+      <div>
+        <div class="ba-pair">
+          <div class="ba-img">
+            <img src="trz-ba-rolls-before-1.jpg" alt="Rolls Royce Ghost interior before detail" loading="lazy" />
+            <div class="ba-label before">Before</div>
+          </div>
+          <div class="ba-img">
+            <img src="trz-ba-rolls-after-1.jpg" alt="Rolls Royce Ghost interior after detail" loading="lazy" />
+            <div class="ba-label after">After</div>
+          </div>
+        </div>
+        <div class="ba-car-name">Rolls Royce Ghost — Full Detail</div>
+      </div>
+
+      <div>
+        <div class="ba-pair">
+          <div class="ba-img">
+            <img src="trz-ba-vw-before-2.jpg" alt="Volkswagen ID.4 trunk before detail" loading="lazy" />
+            <div class="ba-label before">Before</div>
+          </div>
+          <div class="ba-img">
+            <img src="trz-ba-vw-after-2.jpg" alt="Volkswagen ID.4 trunk after detail" loading="lazy" />
+            <div class="ba-label after">After</div>
+          </div>
+        </div>
+        <div class="ba-car-name">Volkswagen ID.4 — Trunk Detail</div>
+      </div>
+
+      <div>
+        <div class="ba-pair">
+          <div class="ba-img">
+            <img src="trz-ba-porsche-before-1.jpg" alt="Porsche Taycan GTS interior before detail" loading="lazy" />
+            <div class="ba-label before">Before</div>
+          </div>
+          <div class="ba-img">
+            <img src="trz-ba-porsche-after-1.jpg" alt="Porsche Taycan GTS interior after detail" loading="lazy" />
+            <div class="ba-label after">After</div>
+          </div>
+        </div>
+        <div class="ba-car-name">Porsche Taycan GTS — Interior Detail</div>
+      </div>
+
+    </div>
+
+    <div style="text-align:center; margin-top:48px;">
+      <div class="section-tag" style="margin-bottom:16px;">More Results</div>
+    </div>
     <div class="gallery-grid-uniform">
       <div class="g-item" data-key="rolls-royce">
-        <img src="trz-car-rolls-royce.jpg" alt="Rolls Royce Ghost full detail" loading="lazy" style="transform: scaleX(-1);" />
-        <div class="g-overlay"><span>Rolls Royce Ghost 💎</span></div>
-        <div class="g-photo-count">4 photos</div>
-      </div>
-      <div class="g-item" data-key="bmw-840i">
-        <img src="trz-car-bmw-840i.jpg" alt="BMW 840i full detail" loading="lazy" />
-        <div class="g-overlay"><span>BMW 840i Full Detail</span></div>
-        <div class="g-photo-count">5 photos</div>
-      </div>
-      <div class="g-item" data-key="tesla-y">
-        <img src="trz-car-tesla-y.jpg" alt="Tesla Model Y detail" loading="lazy" />
-        <div class="g-overlay"><span>Tesla Model Y ⚡️</span></div>
-        <div class="g-photo-count">9 photos</div>
+        <img src="trz-ba-rolls-after-ext.jpg" alt="Rolls Royce Ghost exterior after detail" loading="lazy" />
+        <div class="g-overlay"><span>Rolls Royce Ghost</span></div>
       </div>
       <div class="g-item" data-key="porsche-taycan">
-        <img src="trz-car-porsche-taycan.jpg" alt="Porsche Taycan detail" loading="lazy" />
-        <div class="g-overlay"><span>Porsche Taycan ✨</span></div>
-        <div class="g-photo-count">7 photos</div>
+        <img src="trz-ba-porsche-after-ext.jpg" alt="Porsche Taycan GTS exterior after detail" loading="lazy" />
+        <div class="g-overlay"><span>Porsche Taycan GTS</span></div>
+      </div>
+      <div class="g-item" data-key="range-rover">
+        <img src="trz-ba-rr-after-ext.jpg" alt="Range Rover exterior after detail" loading="lazy" />
+        <div class="g-overlay"><span>Range Rover</span></div>
       </div>
       <div class="g-item" data-key="mercedes-gle">
-        <img src="trz-car-mercedes-gle.jpg" alt="Mercedes GLE 450 detail" loading="lazy" />
-        <div class="g-overlay"><span>Mercedes GLE 450</span></div>
-        <div class="g-photo-count">7 photos</div>
+        <img src="trz-ba-merc-after-ext.jpg" alt="Mercedes exterior after detail" loading="lazy" />
+        <div class="g-overlay"><span>Mercedes</span></div>
       </div>
       <div class="g-item" data-key="bentley">
         <img src="trz-car-bentley.jpg" alt="Bentley Bentayga full detail" loading="lazy" />
-        <div class="g-overlay"><span>Bentley Bentayga 🔥</span></div>
-        <div class="g-photo-count">8 photos</div>
+        <div class="g-overlay"><span>Bentley Bentayga</span></div>
       </div>
       <div class="g-item" data-key="hummer-ev">
         <img src="trz-car-hummer-ev-1.jpg" alt="Hummer EV full detail" loading="lazy" />
-        <div class="g-overlay"><span>Hummer EV Full Detail</span></div>
-        <div class="g-photo-count">5 photos</div>
+        <div class="g-overlay"><span>Hummer EV</span></div>
       </div>
       <div class="g-item" data-key="land-rover-defender">
         <img src="trz-car-land-rover-defender.jpg" alt="Land Rover Defender detail" loading="lazy" />
         <div class="g-overlay"><span>Land Rover Defender</span></div>
-        <div class="g-photo-count">6 photos</div>
-      </div>
-      <div class="g-item" data-key="range-rover">
-        <img src="trz-car-range-rover-1.jpg" alt="Range Rover detail" loading="lazy" />
-        <div class="g-overlay"><span>Range Rover</span></div>
-        <div class="g-photo-count">7 photos</div>
       </div>
       <div class="g-item" data-key="escalade">
         <img src="trz-car-escalade-1.jpg" alt="Cadillac Escalade full detail" loading="lazy" />
         <div class="g-overlay"><span>Cadillac Escalade</span></div>
-        <div class="g-photo-count">8 photos</div>
       </div>
       <div class="g-item" data-key="bmw-m440i">
         <img src="trz-car-bmw-m440i-1.jpg" alt="BMW M440i full detail" loading="lazy" />
         <div class="g-overlay"><span>BMW M440i</span></div>
-        <div class="g-photo-count">8 photos</div>
+      </div>
+      <div class="g-item" data-key="tesla-y">
+        <img src="trz-car-tesla-y.jpg" alt="Tesla Model Y detail" loading="lazy" />
+        <div class="g-overlay"><span>Tesla Model Y</span></div>
+      </div>
+      <div class="g-item" data-key="bmw-840i">
+        <img src="trz-car-bmw-840i.jpg" alt="BMW 840i full detail" loading="lazy" />
+        <div class="g-overlay"><span>BMW 840i</span></div>
       </div>
       <div class="g-item" data-key="camaro-z28">
         <img src="trz-car-camaro-z28-1.jpg" alt="1990 Camaro Z28 full detail" loading="lazy" />
-        <div class="g-overlay"><span>1990 Camaro Z28 🏁</span></div>
-        <div class="g-photo-count">5 photos</div>
+        <div class="g-overlay"><span>1990 Camaro Z28</span></div>
       </div>
     </div>
     <div style="text-align:center; margin-top:40px;">
       <a href="https://www.instagram.com/trzshine/" target="_blank" class="btn-outline-brown" style="display:inline-flex;">
-        📸 &nbsp;See More on Instagram
+        See More on Instagram
       </a>
     </div>
   </section>
@@ -1283,10 +1420,22 @@
       mobileMenu.classList.remove('open');
     }
 
-    // Scroll-to-top
+    // Scroll-to-top + nav shadow (throttled)
     const scrollBtn = document.getElementById('scrollTop');
+    const nav = document.querySelector('nav');
+    let ticking = false;
     window.addEventListener('scroll', () => {
-      scrollBtn.classList.toggle('visible', window.scrollY > 500);
+      if (!ticking) {
+        requestAnimationFrame(() => {
+          const sy = window.scrollY;
+          scrollBtn.classList.toggle('visible', sy > 500);
+          if (nav) {
+            nav.style.boxShadow = sy > 60 ? '0 2px 20px rgba(78,48,23,0.15)' : 'none';
+          }
+          ticking = false;
+        });
+        ticking = true;
+      }
     });
 
     // Form submit handler
@@ -1303,21 +1452,50 @@
       }, 3500);
     }
 
-    // Fade-in on scroll
+    // Fade-in on scroll with staggered delays
     const observer = new IntersectionObserver((entries) => {
+      entries.forEach(e => {
+        if (e.isIntersecting) {
+          const delay = e.target.dataset.delay || 0;
+          setTimeout(() => {
+            e.target.style.opacity = '1';
+            e.target.style.transform = 'translateY(0)';
+          }, delay);
+        }
+      });
+    }, { threshold: 0.1 });
+
+    // Stagger cards within each group
+    document.querySelectorAll('.service-card, .testi-card, .perk, .process-step, .g-item, .ba-pair, .ba-car-name').forEach((el, i) => {
+      el.style.opacity = '0';
+      el.style.transform = 'translateY(28px)';
+      el.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
+      observer.observe(el);
+    });
+
+    // Stagger items within their parent groups
+    document.querySelectorAll('.services-list, .testi-grid, .gallery-grid-uniform, .process-grid, .ba-grid').forEach(group => {
+      Array.from(group.children).forEach((child, i) => {
+        child.dataset.delay = i * 100;
+      });
+    });
+
+    // Animate section titles and dividers
+    const titleObserver = new IntersectionObserver((entries) => {
       entries.forEach(e => {
         if (e.isIntersecting) {
           e.target.style.opacity = '1';
           e.target.style.transform = 'translateY(0)';
+          e.target.classList.remove('anim-ready');
         }
       });
-    }, { threshold: 0.12 });
+    }, { threshold: 0.2 });
 
-    document.querySelectorAll('.service-card, .testi-card, .perk, .process-step, .g-item').forEach(el => {
+    document.querySelectorAll('.section-tag, .section-title, .divider, .section-sub').forEach((el, i) => {
       el.style.opacity = '0';
-      el.style.transform = 'translateY(24px)';
-      el.style.transition = 'opacity 0.5s ease, transform 0.5s ease';
-      observer.observe(el);
+      el.style.transform = 'translateY(16px)';
+      el.style.transition = 'opacity 0.5s ease ' + (i % 3) * 0.1 + 's, transform 0.5s ease ' + (i % 3) * 0.1 + 's';
+      titleObserver.observe(el);
     });
 
     // ── LIGHTBOX ──
