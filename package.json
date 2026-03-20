@@ -1,0 +1,23 @@
+{
+  "name": "trz-shine-detail",
+  "version": "1.0.0",
+  "description": "TRZ Shine & Detail - Premium Car Detailing Website",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/LawsonBick/TRZ-SHINE.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/LawsonBick/TRZ-SHINE/issues"
+  },
+  "homepage": "https://github.com/LawsonBick/TRZ-SHINE#readme",
+  "dependencies": {
+    "@vercel/speed-insights": "^2.0.0"
+  }
+}
