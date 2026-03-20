@@ -598,19 +598,30 @@
       gap: 8px;
     }
     .gallery-grid-uniform .g-item {
-      height: 420px;
+      aspect-ratio: 3 / 4;
     }
     .g-item {
       overflow: hidden;
       border-radius: 4px;
       position: relative;
+      background: var(--dark2);
+      transition: box-shadow 0.4s ease;
+      cursor: pointer;
+    }
+    .g-item:hover {
+      box-shadow: 0 0 18px 4px rgba(232,112,0,0.55), inset 0 0 12px rgba(232,112,0,0.15);
     }
     .g-item img {
       width: 100%; height: 100%;
       object-fit: cover;
-      transition: transform 0.5s ease;
+      object-position: center 30%;
+      transition: transform 0.5s ease, filter 0.4s ease;
+      filter: brightness(1.08) saturate(1.15) contrast(1.05);
     }
-    .g-item:hover img { transform: scale(1.06); }
+    .g-item:hover img {
+      transform: scale(1.06);
+      filter: brightness(1.1) saturate(1.2) contrast(1.05) sepia(0.15) hue-rotate(-10deg);
+    }
     .g-overlay {
       position: absolute; inset: 0;
       background: linear-gradient(to top, rgba(0,0,0,0.55) 0%, transparent 50%);
@@ -920,12 +931,15 @@
     @media (max-width: 600px) {
       section { padding: 70px 5%; }
       .hero { min-height: 100svh; align-items: stretch; padding-top: 0; padding-bottom: 0; }
-      .hero-content { padding-top: 80px; padding-bottom: 24px; display: flex; flex-direction: column; justify-content: space-evenly; min-height: 100svh; box-sizing: border-box; }
-      .hero-tag { margin-bottom: 16px; }
-      .hero h1 { font-size: 38px; margin-bottom: 12px; }
-      .hero p { font-size: 14px; line-height: 1.55; margin-bottom: 20px; }
-      .btn-primary, .btn-outline { padding: 11px 20px; font-size: 12px; }
-      .hero-stats { position: static; margin-top: 0; gap: 24px; justify-content: space-around; }
+      .hero-bg { background-position: 35% center !important; }
+      .hero-content { padding-top: 56px; padding-bottom: 20px; display: flex; flex-direction: column; justify-content: center; gap: 24px; min-height: 100svh; box-sizing: border-box; }
+      .hero-tag { margin-bottom: 10px; }
+      .hero h1 { font-size: 36px; margin-bottom: 10px; }
+      .hero p { font-size: 14px; line-height: 1.75; margin-bottom: 16px; }
+      .btn-primary, .btn-outline { padding: 13px 22px; font-size: 12px; }
+      .hero-btns { margin-bottom: 16px; }
+      .hero-stats { position: static; margin-top: 0; gap: 0; justify-content: space-between; width: 100%; }
+      .stat { text-align: center; flex: 1; }
       .stat .num { font-size: 28px; }
       .stat .lbl { font-size: 10px; }
       .form-row { grid-template-columns: 1fr; }
@@ -1080,7 +1094,7 @@
       <div class="why-visual">
         <img
           class="why-img"
-          src="trz-car-bentley.jpg"
+          src="trz-car-bentley-new.jpg"
           alt="Bentley Bentayga full detail by TRZ Shine"
           loading="lazy"
         />
@@ -1194,15 +1208,29 @@
       <div>
         <div class="ba-pair">
           <div class="ba-img">
-            <img src="trz-ba-porsche-before-1.jpg" alt="Porsche Taycan GTS interior before detail" loading="lazy" />
+            <img src="trz-ba-f150-1.jpg" alt="Ford F-150 front interior before detail" loading="lazy" />
             <div class="ba-label before">Before</div>
           </div>
           <div class="ba-img">
-            <img src="trz-ba-porsche-after-1.jpg" alt="Porsche Taycan GTS interior after detail" loading="lazy" />
+            <img src="trz-ba-f150-3.jpg" alt="Ford F-150 front interior after detail" loading="lazy" />
             <div class="ba-label after">After</div>
           </div>
         </div>
-        <div class="ba-car-name">Porsche Taycan GTS — Interior Detail</div>
+        <div class="ba-car-name">Ford F-150 — Front Interior Detail</div>
+      </div>
+
+      <div>
+        <div class="ba-pair">
+          <div class="ba-img">
+            <img src="trz-ba-f150-2.jpg" alt="Ford F-150 back seat before detail" loading="lazy" />
+            <div class="ba-label before">Before</div>
+          </div>
+          <div class="ba-img">
+            <img src="trz-ba-f150-4.jpg" alt="Ford F-150 back seat after detail" loading="lazy" />
+            <div class="ba-label after">After</div>
+          </div>
+        </div>
+        <div class="ba-car-name">Ford F-150 — Back Seat Detail</div>
       </div>
 
     </div>
@@ -1224,11 +1252,11 @@
         <div class="g-overlay"><span>Range Rover</span></div>
       </div>
       <div class="g-item" data-key="mercedes-gle">
-        <img src="trz-ba-merc-after-ext.jpg" alt="Mercedes exterior after detail" loading="lazy" />
+        <img src="trz-car-mercedes-gle-1.jpg" alt="Mercedes exterior after detail" loading="lazy" />
         <div class="g-overlay"><span>Mercedes</span></div>
       </div>
       <div class="g-item" data-key="bentley">
-        <img src="trz-car-bentley.jpg" alt="Bentley Bentayga full detail" loading="lazy" />
+        <img src="trz-car-bentley-new.jpg" alt="Bentley Bentayga full detail" loading="lazy" />
         <div class="g-overlay"><span>Bentley Bentayga</span></div>
       </div>
       <div class="g-item" data-key="hummer-ev">
@@ -1244,7 +1272,7 @@
         <div class="g-overlay"><span>Cadillac Escalade</span></div>
       </div>
       <div class="g-item" data-key="bmw-m440i">
-        <img src="trz-car-bmw-m440i-1.jpg" alt="BMW M440i full detail" loading="lazy" />
+        <img src="trz-car-bmw-m440i-2.jpg" alt="BMW M440i full detail" loading="lazy" />
         <div class="g-overlay"><span>BMW M440i</span></div>
       </div>
       <div class="g-item" data-key="tesla-y">
@@ -1386,7 +1414,7 @@
           <li><a href="#services">Full Detail</a></li>
           <li><a href="#services">Paint Correction</a></li>
           <li><a href="#services">Ceramic Coating</a></li>
-          <li><a href="#services">Window Tinting</a></li>
+
         </ul>
       </div>
       <div class="footer-col">
@@ -1501,17 +1529,17 @@
     // ── LIGHTBOX ──
     (function() {
       const GALLERY = {
-        'rolls-royce':        { title: 'Rolls Royce Ghost 💎',    photos: ['trz-car-rolls-royce-1.jpg','trz-car-rolls-royce-2.jpg','trz-car-rolls-royce-3.jpg','trz-car-rolls-royce-4.jpg'] },
+        'rolls-royce':        { title: 'Rolls Royce Ghost 💎',    photos: ['trz-ba-rolls-after-ext.jpg','trz-ba-rolls-after-1.jpg','trz-car-rolls-royce-1.jpg','trz-car-rolls-royce-2.jpg','trz-car-rolls-royce-3.jpg','trz-car-rolls-royce-4.jpg'] },
         'bmw-840i':           { title: 'BMW 840i Full Detail',     photos: ['trz-car-bmw-840i-1.jpg','trz-car-bmw-840i-2.jpg','trz-car-bmw-840i-3.jpg','trz-car-bmw-840i-4.jpg','trz-car-bmw-840i-5.jpg'] },
         'tesla-y':            { title: 'Tesla Model Y ⚡️',        photos: ['trz-car-tesla-y-1.jpg','trz-car-tesla-y-2.jpg','trz-car-tesla-y-3.jpg','trz-car-tesla-y-4.jpg','trz-car-tesla-y-5.jpg','trz-car-tesla-y-6.jpg','trz-car-tesla-y-7.jpg','trz-car-tesla-y-8.jpg','trz-car-tesla-y-9.jpg'] },
-        'porsche-taycan':     { title: 'Porsche Taycan ✨',        photos: ['trz-car-porsche-taycan-1.jpg','trz-car-porsche-taycan-2.jpg','trz-car-porsche-taycan-3.jpg','trz-car-porsche-taycan-4.jpg','trz-car-porsche-taycan-5.jpg','trz-car-porsche-taycan-6.jpg','trz-car-porsche-taycan-7.jpg'] },
-        'mercedes-gle':       { title: 'Mercedes GLE 450',         photos: ['trz-car-mercedes-gle-1.jpg','trz-car-mercedes-gle-2.jpg','trz-car-mercedes-gle-3.jpg','trz-car-mercedes-gle-4.jpg','trz-car-mercedes-gle-5.jpg','trz-car-mercedes-gle-6.jpg','trz-car-mercedes-gle-7.jpg'] },
+        'porsche-taycan':     { title: 'Porsche Taycan ✨',        photos: ['trz-ba-porsche-after-ext.jpg','trz-ba-porsche-after-1.jpg','trz-car-porsche-taycan-1.jpg','trz-car-porsche-taycan-2.jpg','trz-car-porsche-taycan-3.jpg','trz-car-porsche-taycan-4.jpg','trz-car-porsche-taycan-5.jpg','trz-car-porsche-taycan-6.jpg','trz-car-porsche-taycan-7.jpg'] },
+        'mercedes-gle':       { title: 'Mercedes',                 photos: ['trz-ba-merc-after-1.jpg','trz-car-mercedes-gle-1.jpg','trz-car-mercedes-gle-2.jpg','trz-car-mercedes-gle-3.jpg','trz-car-mercedes-gle-4.jpg','trz-car-mercedes-gle-5.jpg','trz-car-mercedes-gle-6.jpg','trz-car-mercedes-gle-7.jpg'] },
         'bentley':            { title: 'Bentley Bentayga 🔥',      photos: ['trz-car-bentley-1.jpg','trz-car-bentley-2.jpg','trz-car-bentley-3.jpg','trz-car-bentley-4.jpg','trz-car-bentley-5.jpg','trz-car-bentley-6.jpg','trz-car-bentley-7.jpg','trz-car-bentley-8.jpg'] },
         'hummer-ev':          { title: 'Hummer EV Full Detail',    photos: ['trz-car-hummer-ev-1.jpg','trz-car-hummer-ev-2.jpg','trz-car-hummer-ev-3.jpg','trz-car-hummer-ev-4.jpg','trz-car-hummer-ev-5.jpg'] },
         'land-rover-defender':{ title: 'Land Rover Defender',      photos: ['trz-car-land-rover-defender-1.jpg','trz-car-land-rover-defender-2.jpg','trz-car-land-rover-defender-3.jpg','trz-car-land-rover-defender-4.jpg','trz-car-land-rover-defender-5.jpg','trz-car-land-rover-defender-6.jpg'] },
         'bmw-m440i':          { title: 'BMW M440i',                photos: ['trz-car-bmw-m440i-1.jpg','trz-car-bmw-m440i-2.jpg','trz-car-bmw-m440i-3.jpg','trz-car-bmw-m440i-4.jpg','trz-car-bmw-m440i-5.jpg','trz-car-bmw-m440i-6.jpg','trz-car-bmw-m440i-7.jpg','trz-car-bmw-m440i-8.jpg'] },
         'camaro-z28':         { title: '1990 Camaro Z28 🏁',       photos: ['trz-car-camaro-z28-1.jpg','trz-car-camaro-z28-2.jpg','trz-car-camaro-z28-3.jpg','trz-car-camaro-z28-4.jpg','trz-car-camaro-z28-5.jpg'] },
-        'range-rover':        { title: 'Range Rover',              photos: ['trz-car-range-rover-1.jpg','trz-car-range-rover-2.jpg','trz-car-range-rover-3.jpg','trz-car-range-rover-4.jpg','trz-car-range-rover-5.jpg','trz-car-range-rover-6.jpg','trz-car-range-rover-7.jpg'] },
+        'range-rover':        { title: 'Range Rover',              photos: ['trz-ba-rr-after-ext.jpg','trz-ba-rr-after-ext2.jpg','trz-ba-rr-after-1.jpg'] },
         'escalade':           { title: 'Cadillac Escalade',        photos: ['trz-car-escalade-1.jpg','trz-car-escalade-2.jpg','trz-car-escalade-3.jpg','trz-car-escalade-4.jpg','trz-car-escalade-5.jpg','trz-car-escalade-6.jpg','trz-car-escalade-7.jpg','trz-car-escalade-8.jpg'] },
       };
 
